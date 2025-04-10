@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'ManagerHomePage.dart';
 import 'SignUp.dart';
-import 'homePage.dart';
-import 'package:http/http.dart' as http;
 import 'login.dart';
 import 'helper.dart';
 
@@ -230,7 +228,7 @@ class _Managerlogin extends State<Managerlogin> {
     //     "password": _passwordController.text,
     //   }),
     // );
-    const url = 'https://rc-mgmp.themeghalayanage.com/api/auth/sign_in';
+    // const url = 'https://rc-mgmp.themeghalayanage.com/api/auth/sign_in';
     final body = {
       "applicationId": "63d13582e3890f5f73468476",
       "method": 2,

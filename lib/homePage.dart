@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' ;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'login.dart';
 class MyHomePage extends StatelessWidget {
   @override
@@ -10,10 +11,48 @@ class MyHomePage extends StatelessWidget {
             icon: Icon(Icons.logout),
             onPressed: () => _showLogoutDialog(context),
           ),
-        ],),
+        ],
+      ),
       drawer: AppDrawer(),
-      body: Center(
-        // child: Text('Home Page', style: TextStyle(fontSize: 24)),
+      body:
+      Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Container(
+              height: 100,
+              width: 120,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                // border: Border(left:BorderSide(color:Colors.black)),
+                color: Colors.orange[50]
+              ),
+              child: Text("Event", style: TextStyle(fontSize: 18)),
+            ),
+            // SizedBox(height: 16),
+            Container(
+              height: 100,
+              width: 120,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  border: Border(left:BorderSide(color:Colors.black)),
+                  color: Colors.orange[50]
+              ),
+              child: Text("Managers", style: TextStyle(fontSize: 18)),
+            ),
+            // SizedBox(height: 16),
+            Container(
+              height: 100,
+              width: 120,
+              decoration: BoxDecoration(
+                  border: Border(left:BorderSide(color:Colors.black)),
+                  color: Colors.orange[50]
+              ),
+              alignment: Alignment.center,
+              child: Text("Artists", style: TextStyle(fontSize: 18)),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -27,22 +66,26 @@ void _showLogoutDialog(BuildContext context) {
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.of(ctx).pop(); // Close dialog
+            Navigator.of(ctx).pop();
           },
           child: Text('Cancel'),
         ),
         ElevatedButton(
-          onPressed: () {
-            // Navigator.of(ctx).pop(); // Close dialog
-            // // Add your logout logic here
-            // Navigator.of(context).pushReplacementNamed('/Login'); // Example: navigate to login
+          onPressed: () async{
+            SharedPreferences pref=await SharedPreferences.getInstance();
+            await pref.clear();
+            Navigator.of(ctx).pop();
+            // Navigator.of(context).pushAndRemoveUntil(
+            //   MaterialPageRoute(builder: (context)=>Login()),
+            //     (route)=>false
+            // );
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (_) => Login()),
             );
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.yellow, // Logout button color
+            backgroundColor: Colors.blue,
           ),
           child: Text('Logout'),
         ),
@@ -55,7 +98,7 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Drawer Example'),
+
       ),
       drawer: AppDrawer(),
       body: Center(
@@ -155,8 +198,6 @@ class AppDrawer extends StatelessWidget {
             margin: EdgeInsets.zero,
             padding: EdgeInsets.zero,
             child: Container(
-            // height: 80,
-            // width: 100,
             alignment: Alignment.center,
             child: Text(
               'Menu',
@@ -168,12 +209,14 @@ class AppDrawer extends StatelessWidget {
           ),
           ),
           ListTile(
+
             leading: Icon(Icons.dashboard),
             title: Text('Dashboard'),
             onTap: () {
-              Navigator.pushReplacementNamed(context, '/dashboard');
+              Navigator.pushReplacementNamed(context, '/Dashboard');
             },
           ),
+          SizedBox(height: 15),
           ListTile(
             leading: Icon(Icons.music_note),
             title: Text('Artist'),
@@ -181,6 +224,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/artist');
             },
           ),
+          SizedBox(height: 15),
           ListTile(
             leading: Icon(Icons.manage_accounts),
             title: Text('EventManager'),
@@ -188,6 +232,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/eventManager');
             },
           ),
+          SizedBox(height: 15),
           ListTile(
             leading: Icon(Icons.library_music),
             title: Text('Genres'),
@@ -195,13 +240,15 @@ class AppDrawer extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/genres');
             },
           ),
+          SizedBox(height: 15),
           ListTile(
             leading: Icon(Icons.widgets),
             title: Text('Categories'),
             onTap: () {
-              Navigator.pushReplacementNamed(context, '/categories');
+              Navigator.pushReplacementNamed(context, '/Categories');
             },
           ),
+          SizedBox(height: 15),
           ListTile(
             leading: Icon(Icons.style),
             title: Text('EventType'),
@@ -209,6 +256,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/eventType');
             },
           ),
+          SizedBox(height: 15),
           ListTile(
             leading: Icon(Icons.place),
             title: Text('Locations'),
@@ -216,6 +264,7 @@ class AppDrawer extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/locations');
             },
           ),
+          SizedBox(height: 15),
           ListTile(
             leading: Icon(Icons.calendar_today),
             title: Text('Events'),

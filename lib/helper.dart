@@ -1,8 +1,5 @@
-
-
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 requestApi(key,body) async {
   const url = 'https://rc-mgmp.themeghalayanage.com/api/';
   final uri = Uri.parse(url+key);
@@ -15,6 +12,5 @@ requestApi(key,body) async {
     },
     body: jsonEncode(body),
   );
-
   return response;
 }

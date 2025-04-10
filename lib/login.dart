@@ -2,10 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'SignUp.dart';
 import 'ManagerLogin.dart';
 import 'homePage.dart';
-import 'package:http/http.dart' as http;
 import 'helper.dart';
 
 class Login extends StatefulWidget {
@@ -118,8 +116,6 @@ Widget buildForgetAndManagerBtns(BuildContext context) {
   );
 }
 
-
-
 class _LoginState extends State<Login> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -225,7 +221,7 @@ class _LoginState extends State<Login> {
       return;
     }
 
-    // Proceed with API request if all validations pass
+
     // const url = 'https://rc-mgmp.themeghalayanage.com/api/auth/sign_in';
     // final uri = Uri.parse(url);
     //
